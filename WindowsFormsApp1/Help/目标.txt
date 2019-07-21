@@ -1,0 +1,8 @@
+﻿1	在Mainpart下修改DesktopIcon，使之鼠标移出时不改变
+2	添加拖动图标程序
+To 马岚冰
+	在Mainpart下修改DesktopIcon代码
+	第92/112行参数
+	FromArgb（透明度，红，绿，蓝）
+	选一个你认为好看的颜色
+	谢谢

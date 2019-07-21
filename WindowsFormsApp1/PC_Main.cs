@@ -98,6 +98,7 @@ namespace WindowsFormsApp1
                 //Try the existed control
                 desktopIcon1.Caption = ((DIO.DI)DI_List[0]).Name;
                 desktopIcon1.Image = ((DIO.DI)DI_List[0]).Icon;
+                
             }
             #endregion
         }
@@ -300,6 +301,11 @@ namespace WindowsFormsApp1
 
         }
         #region 关机菜单
+        private void sleep_Click(object sender, EventArgs e)
+        {
+            sleep.Size = new Size(0, 0);
+        }
+
         private void shut1_MouseEnter(object sender, EventArgs e)
         {
             shut1.BackColor = Color.DimGray;
@@ -329,7 +335,7 @@ namespace WindowsFormsApp1
 
         private void shut1_MouseUp(object sender, MouseEventArgs e)
         {
-            sleep.Visible = true;
+            sleep.Size = new Size(Width, Height);
         }
 
         private void shut2_MouseEnter(object sender, EventArgs e)
@@ -361,7 +367,7 @@ namespace WindowsFormsApp1
 
         private void shut2_MouseUp(object sender, MouseEventArgs e)
         {
-            sleep.Visible = true;
+            sleep.Size = new Size(Width, Height);
         }
 
         private void shut3_MouseEnter(object sender, EventArgs e)
@@ -470,14 +476,16 @@ namespace WindowsFormsApp1
 
         }
 
-        private void desktopIcon1_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void PC_Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             
         }
+
+        private void Icon_Click(object sender2, EventArgs e)
+        {
+            MainPart.DesktopIcon sender = (MainPart.DesktopIcon)sender2;
+            sender.BackColor = Color.FromArgb(100, 150, 150, 225);
+        }
+
     }
 }

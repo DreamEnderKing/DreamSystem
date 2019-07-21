@@ -226,12 +226,12 @@
             // 
             // sleep
             // 
-            this.sleep.AutoSize = true;
-            this.sleep.Location = new System.Drawing.Point(-2, 9);
+            this.sleep.BackColor = System.Drawing.Color.Black;
+            this.sleep.Location = new System.Drawing.Point(0, 0);
             this.sleep.Name = "sleep";
-            this.sleep.Size = new System.Drawing.Size(41, 12);
+            this.sleep.Size = new System.Drawing.Size(0, 0);
             this.sleep.TabIndex = 3;
-            this.sleep.Text = "label1";
+            this.sleep.Click += new System.EventHandler(this.sleep_Click);
             // 
             // wlanShow1
             // 
@@ -267,7 +267,7 @@
             this.desktopIcon1.Size = new System.Drawing.Size(74, 112);
             this.desktopIcon1.TabIndex = 0;
             this.desktopIcon1.Visible = false;
-            this.desktopIcon1.Load += new System.EventHandler(this.desktopIcon1_Load);
+            this.desktopIcon1.Click += new System.EventHandler(this.Icon_Click);
             // 
             // PC_Main
             // 
@@ -277,9 +277,9 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1200, 650);
+            this.Controls.Add(this.sleep);
             this.Controls.Add(this.timeShow2);
             this.Controls.Add(this.wlanShow1);
-            this.Controls.Add(this.sleep);
             this.Controls.Add(this.menuMain);
             this.Controls.Add(this.menuBtn);
             this.Controls.Add(this.task);
@@ -300,7 +300,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.settings)).EndInit();
             this.Desktop_Main.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

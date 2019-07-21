@@ -45,6 +45,9 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "12345678901234567890\r\n";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label1.Click += new System.EventHandler(this.DesktopIcon_Click);
+            this.label1.MouseEnter += new System.EventHandler(this.DesktopIcon_MouseEnter);
+            this.label1.MouseLeave += new System.EventHandler(this.DesktopIcon_MouseLeave);
             // 
             // pictureBox1
             // 
@@ -55,6 +58,9 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.DesktopIcon_Click);
+            this.pictureBox1.MouseEnter += new System.EventHandler(this.DesktopIcon_MouseEnter);
+            this.pictureBox1.MouseLeave += new System.EventHandler(this.DesktopIcon_MouseLeave);
             // 
             // timer1
             // 
@@ -71,6 +77,9 @@
             this.Name = "DesktopIcon";
             this.Size = new System.Drawing.Size(74, 111);
             this.Load += new System.EventHandler(this.DesktopIcon_Load);
+            this.Click += new System.EventHandler(this.DesktopIcon_Click);
+            this.MouseEnter += new System.EventHandler(this.DesktopIcon_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.DesktopIcon_MouseLeave);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

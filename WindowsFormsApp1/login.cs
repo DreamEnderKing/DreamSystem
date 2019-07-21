@@ -209,6 +209,7 @@ namespace WindowsFormsApp1
         //用户名翻页
         private void forward_Click(object sender, EventArgs e)
         {
+            userpass.Text = "";
             int i = UserIndex;
 
             if ((i+1)<=UserNumber)
@@ -227,6 +228,7 @@ namespace WindowsFormsApp1
 
         private void back_Click(object sender, EventArgs e)
         {
+            userpass.Text = "";
             int i = UserIndex;
 
             if ((i - 1) >= 0)

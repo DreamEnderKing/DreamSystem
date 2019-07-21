@@ -82,8 +82,10 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MyControls">
-      <HintPath>..\..\ClassLibrary1\MyControls\bin\Release\MyControls.dll</HintPath>
+    <Reference Include="MyControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\UnsafeDebug\PC\public\localRoot\MyControls.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -205,6 +207,8 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Help\桌面.txt" />
+    <Content Include="Help\目标.txt" />
     <Content Include="Others\icon.ico" />
     <None Include="Resources\1.gif" />
     <None Include="Resources\lock.jpg" />

@@ -77,5 +77,40 @@ namespace WindowsFormsApp1.MainPart
         {
             LoadAsync();
         }
+
+        private void DesktopIcon_Click(object sender, EventArgs e)
+        {
+            foreach (DesktopIcon item in Parent.Controls)
+            {
+                item.BorderStyle = BorderStyle.None;
+                item.BackColor = Color.Transparent;
+                item.choosed = false;
+            }
+            if (!leave)
+            {
+                BorderStyle = BorderStyle.Fixed3D;
+                BackColor = Color.FromArgb(175, 128, 255, 255);
+                choosed = true;
+            }
+        }
+        bool leave = false;
+        protected bool choosed = false;
+        private void DesktopIcon_MouseLeave(object sender, EventArgs e)
+        {
+            leave = true;
+            if(!choosed)
+            {
+                BackColor = Color.Transparent;
+            }
+        }
+
+        private void DesktopIcon_MouseEnter(object sender, EventArgs e)
+        {
+            leave = false;
+            if (!choosed)
+            {
+                BackColor = Color.FromArgb(125, 128, 255, 255);
+            }
+        }
     }
 }
