@@ -46,8 +46,11 @@
             this.label1.Text = "12345678901234567890\r\n";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label1.Click += new System.EventHandler(this.DesktopIcon_Click);
+            this.label1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DesktopIcon_MouseDown);
             this.label1.MouseEnter += new System.EventHandler(this.DesktopIcon_MouseEnter);
             this.label1.MouseLeave += new System.EventHandler(this.DesktopIcon_MouseLeave);
+            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DesktopIcon_MouseMove);
+            this.label1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DesktopIcon_MouseUp);
             // 
             // pictureBox1
             // 
@@ -59,8 +62,11 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.DesktopIcon_Click);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DesktopIcon_MouseDown);
             this.pictureBox1.MouseEnter += new System.EventHandler(this.DesktopIcon_MouseEnter);
             this.pictureBox1.MouseLeave += new System.EventHandler(this.DesktopIcon_MouseLeave);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DesktopIcon_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DesktopIcon_MouseUp);
             // 
             // timer1
             // 
@@ -78,8 +84,11 @@
             this.Size = new System.Drawing.Size(74, 111);
             this.Load += new System.EventHandler(this.DesktopIcon_Load);
             this.Click += new System.EventHandler(this.DesktopIcon_Click);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DesktopIcon_MouseDown);
             this.MouseEnter += new System.EventHandler(this.DesktopIcon_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.DesktopIcon_MouseLeave);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DesktopIcon_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DesktopIcon_MouseUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

@@ -17,6 +17,7 @@ namespace WindowsFormsApp1.MainPart
             InitializeComponent();
         }
 
+        #region 主工作区
         private void DesktopIcon_Load(object sender, EventArgs e)
         {
             LoadAsync();
@@ -77,7 +78,9 @@ namespace WindowsFormsApp1.MainPart
         {
             LoadAsync();
         }
+        #endregion
 
+        #region 图标突出
         private void DesktopIcon_Click(object sender, EventArgs e)
         {
             foreach (DesktopIcon item in Parent.Controls)
@@ -112,5 +115,36 @@ namespace WindowsFormsApp1.MainPart
                 BackColor = Color.FromArgb(125, 128, 255, 255);
             }
         }
+        #endregion
+
+        #region 图标拖动
+        bool moving = false;
+
+        private void DesktopIcon_MouseDown(object sender, MouseEventArgs e)
+        {
+            moving = true;
+            origin = new Point(e.X, e.Y);
+        }
+
+        private void DesktopIcon_MouseUp(object sender, MouseEventArgs e)
+        {
+            moving = false;
+        }
+
+        Point origin = new Point(0, 0);
+        Point Newtemp = new Point(0, 0);
+        private void DesktopIcon_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(moving)
+            {
+                //初步移动
+                Newtemp = new Point(e.X, e.Y);
+                Left = Left + Newtemp.X - origin.X;
+                Top = Top + Newtemp.Y - origin.Y;
+            }
+        }
+
+        #endregion
+
     }
 }

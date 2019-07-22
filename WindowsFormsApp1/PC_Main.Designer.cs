@@ -260,14 +260,15 @@
             // 
             // desktopIcon1
             // 
+            this.desktopIcon1.BackColor = System.Drawing.Color.OrangeRed;
             this.desktopIcon1.Caption = "1234567890123";
             this.desktopIcon1.Image = ((System.Drawing.Image)(resources.GetObject("desktopIcon1.Image")));
-            this.desktopIcon1.Location = new System.Drawing.Point(432, 86);
+            this.desktopIcon1.Location = new System.Drawing.Point(689, 259);
             this.desktopIcon1.Name = "desktopIcon1";
             this.desktopIcon1.Size = new System.Drawing.Size(74, 112);
             this.desktopIcon1.TabIndex = 0;
-            this.desktopIcon1.Visible = false;
-            this.desktopIcon1.Click += new System.EventHandler(this.Icon_Click);
+            this.desktopIcon1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Icon_MouseDown);
+            this.desktopIcon1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Icon_MouseMove);
             // 
             // PC_Main
             // 
