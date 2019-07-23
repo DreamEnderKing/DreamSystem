@@ -129,6 +129,18 @@ namespace WindowsFormsApp1.MainPart
         private void DesktopIcon_MouseUp(object sender, MouseEventArgs e)
         {
             moving = false;
+            #region 移动定位
+            //模糊控制
+            int l = Left - 3;
+            int t = Top - 4;
+            int xt = l % 80;
+            int yt = t % 120;
+            int x = (xt <= 40) ? (Left - 3) / 80 : (Left - 3) / 80 + 1;
+            int y = (yt <= 60) ? (Top - 3) / 120 : (Top - 3) / 120 + 1;
+            //结果赋值
+            Left = x * 80 + 3;
+            Top = y * 120 + 4;
+            #endregion
         }
 
         Point origin = new Point(0, 0);
