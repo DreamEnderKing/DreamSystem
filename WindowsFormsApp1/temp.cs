@@ -53,12 +53,10 @@ namespace WindowsFormsApp1
             public int Y;
 
         }
-        static int time_r;
 
         public static void writeDI(string folderpath,DI item)
         {
             BinaryWriter file = new BinaryWriter(new FileStream(folderpath + "\\" + item.Name + ".rw",FileMode.Create));
-            int position = 0;
             //第一步：写入名称
             Byte[] bytes = new Byte[2 * item.Name.Length];
             for (int i = 0; i < item.Name.Length; i++)

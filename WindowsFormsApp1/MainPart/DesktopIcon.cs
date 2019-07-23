@@ -25,10 +25,15 @@ namespace WindowsFormsApp1.MainPart
 
         private async Task LoadAsync()
         {
-            Changed += new EventHandler(emptyEvent);
+            //初始化框架
             Width = 74;
             Height = 112;
-
+            Left = 80 * dataSource.X + 3;
+            Top = 120 * dataSource.Y + 4;
+            //提取数据
+            _label = dataSource.Name;
+            _image = dataSource.Icon;
+            //执行任务
             pictureBox1.Image = _image;
             if(_label.Length<=18)
             {
@@ -44,35 +49,9 @@ namespace WindowsFormsApp1.MainPart
 
         private Image _image = new Bitmap(64, 64);
 
-        public Image Image
-        {
-            get => _image;
-            set
-            {
-                _image = value;
-                LoadAsync();
-                Changed(this, new EventArgs());
-            }
-        }
-
         private String _label = "";
 
-        public String Caption
-        {
-            get => _label;
-            set
-            {
-                _label = value;
-                LoadAsync();
-                Changed(this, new EventArgs());
-
-            }
-        }
-
-        public event EventHandler Changed;
-
-        private void emptyEvent(object sender,EventArgs e)
-        { }
+        public DIO.DI dataSource { get; set; }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -135,11 +114,14 @@ namespace WindowsFormsApp1.MainPart
             int t = Top - 4;
             int xt = l % 80;
             int yt = t % 120;
-            int x = (xt <= 40) ? (Left - 3) / 80 : (Left - 3) / 80 + 1;
-            int y = (yt <= 60) ? (Top - 3) / 120 : (Top - 3) / 120 + 1;
-            //结果赋值
-            Left = x * 80 + 3;
-            Top = y * 120 + 4;
+            dataSource.X = (xt <= 40) ? (Left - 3) / 80 : (Left - 3) / 80 + 1;
+            dataSource.Y = (yt <= 60) ? (Top - 3) / 120 : (Top - 3) / 120 + 1;
+            //启用更改
+            LoadAsync();
+            timer1.Enabled = true;
+            #endregion
+            #region 写入更改
+            DIO.writeDI(Application.StartupPath + @"\PC\users\" + Tmp.user.User + @"\Desktop", dataSource);
             #endregion
         }
 
@@ -149,6 +131,8 @@ namespace WindowsFormsApp1.MainPart
         {
             if(moving)
             {
+                //关闭自动处理
+                timer1.Enabled = false;
                 //初步移动
                 Newtemp = new Point(e.X, e.Y);
                 Left = Left + Newtemp.X - origin.X;

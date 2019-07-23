@@ -46,7 +46,6 @@
             this.wlanShow1 = new MyControls.WlanShow_Icon();
             this.timeShow2 = new MyControls.TimeShow();
             this.Desktop_Main = new System.Windows.Forms.Panel();
-            this.desktopIcon1 = new WindowsFormsApp1.MainPart.DesktopIcon();
             ((System.ComponentModel.ISupportInitialize)(this.task)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuBtn)).BeginInit();
             this.menuMain.SuspendLayout();
@@ -54,7 +53,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.UserIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.shutBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings)).BeginInit();
-            this.Desktop_Main.SuspendLayout();
             this.SuspendLayout();
             // 
             // task
@@ -252,23 +250,10 @@
             // Desktop_Main
             // 
             this.Desktop_Main.BackColor = System.Drawing.Color.Transparent;
-            this.Desktop_Main.Controls.Add(this.desktopIcon1);
             this.Desktop_Main.Location = new System.Drawing.Point(0, 0);
             this.Desktop_Main.Name = "Desktop_Main";
             this.Desktop_Main.Size = new System.Drawing.Size(1200, 600);
             this.Desktop_Main.TabIndex = 5;
-            // 
-            // desktopIcon1
-            // 
-            this.desktopIcon1.BackColor = System.Drawing.Color.OrangeRed;
-            this.desktopIcon1.Caption = "1234567890123";
-            this.desktopIcon1.Image = ((System.Drawing.Image)(resources.GetObject("desktopIcon1.Image")));
-            this.desktopIcon1.Location = new System.Drawing.Point(689, 259);
-            this.desktopIcon1.Name = "desktopIcon1";
-            this.desktopIcon1.Size = new System.Drawing.Size(74, 112);
-            this.desktopIcon1.TabIndex = 0;
-            this.desktopIcon1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Icon_MouseDown);
-            this.desktopIcon1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Icon_MouseMove);
             // 
             // PC_Main
             // 
@@ -299,7 +284,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.UserIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.shutBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings)).EndInit();
-            this.Desktop_Main.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -323,6 +307,5 @@
         private MyControls.TimeShow timeShow2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel Desktop_Main;
-        private MainPart.DesktopIcon desktopIcon1;
     }
 }

@@ -470,16 +470,9 @@ namespace WindowsFormsApp1
                     //Create a Control
                     MainPart.DesktopIcon desktopIcon = new MainPart.DesktopIcon();
                     desktopIcon.Name = "DesktopIcon";
-                    //Put the control
-                    desktopIcon.Left = 80 * i.X + 3;
-                    desktopIcon.Top = 120 * i.Y + 4;
                     //Show the control
-                    desktopIcon.Image = i.Icon;
-                    desktopIcon.Caption = i.Name;
+                    desktopIcon.dataSource = i;
                     Desktop_Main.Controls.Add(desktopIcon);
-                    //Try the existed control
-                    desktopIcon1.Caption = ((DIO.DI)DI_List[0]).Name;
-                    desktopIcon1.Image = ((DIO.DI)DI_List[0]).Icon;
                 
                 }
                 #endregion
