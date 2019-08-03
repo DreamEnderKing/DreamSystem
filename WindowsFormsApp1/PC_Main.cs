@@ -36,7 +36,7 @@ namespace WindowsFormsApp1
         private void PC_Main_FormClosed(object sender, FormClosedEventArgs e)
         {
 
-
+            Desktop_Exit();
             Application.Exit();
 
         }
@@ -455,14 +455,17 @@ namespace WindowsFormsApp1
                 #region Get DesktopIcons
                 ArrayList DI_List = new ArrayList();
                 DirectoryInfo d = new DirectoryInfo(Application.StartupPath + @"\PC\users\" + Temp.User + @"\Desktop");
-                /*
+                
                 Bitmap btemp = new Bitmap(@"E:\3.gif");
-                DIO.DI dI = new DIO.DI("new icon", btemp);
+                DIO.DI dI = new DIO.DI("aaa", btemp);
                 dI.X = 2;
                 dI.Y = 3;
+                dI.Target = "E:\\keyascii.exe";
+                dI.Source = "aaxc";
                 DIO.writeDI(d.FullName, dI);
-                */
+                
                 DIO.readDIs(d, out DI_List);
+                Console.WriteLine(((DIO.DI)DI_List[0]).Target);
                 #endregion
                 #region Draw DesktopIcons
                 foreach (DIO.DI i in DI_List)
@@ -477,16 +480,17 @@ namespace WindowsFormsApp1
                 }
                 #endregion
             }
-
-            #region 图标拖动
-            private void Icon_MouseDown(object sender, MouseEventArgs e)
+            #region 图标退出
+            private void Desktop_Exit()
             {
-
-            }
-            
-            private void Icon_MouseMove(object sender, MouseEventArgs e)
-            {
-
+                foreach (FileInfo item in (new DirectoryInfo(Application.StartupPath + @"\PC\users\" + Temp.User + @"\Desktop")).EnumerateFiles())
+                {
+                    item.Delete();
+                }
+                foreach (MainPart.DesktopIcon item in Desktop_Main.Controls)
+                {
+                    item.Save();
+                }
             }
             #endregion
         #endregion

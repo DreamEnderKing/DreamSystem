@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
+using System.Runtime.InteropServices;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -121,7 +124,7 @@ namespace WindowsFormsApp1.MainPart
             timer1.Enabled = true;
             #endregion
             #region 写入更改
-            DIO.writeDI(Application.StartupPath + @"\PC\users\" + Tmp.user.User + @"\Desktop", dataSource);
+            Save();
             #endregion
         }
 
@@ -142,5 +145,40 @@ namespace WindowsFormsApp1.MainPart
 
         #endregion
 
+        #region 执行主任务
+        private void DesktopIcon_DoubleClick(object sender, EventArgs e)
+        {
+            if (!File.Exists(dataSource.Target))
+            {
+                DialogResult result = MessageBox.Show("指定的文件不存在！\n是否删除图标？", "Dream PC1.0", MessageBoxButtons.YesNo);
+                if(result==DialogResult.Yes)
+                {
+                    //删除该快捷方式
+                    /*
+                    try
+                    {
+                        File.Delete(Application.StartupPath + @"\PC\users\" + Tmp.user.User + @"\Desktop\" + dataSource.Source + ".rw");
+                        File.Delete(Application.StartupPath + @"\PC\users\" + Tmp.user.User + @"\Desktop\" + dataSource.Source + ".rwp");
+                    }
+                    catch(Exception err)
+                    {
+                        MessageBox.Show(err.Message, "Dream PC", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    */
+                    //删除本图标
+                    Dispose();
+                }
+            }
+            else
+            {
+                Process.Start(dataSource.Target);
+            }
+        }
+
+        public void Save()
+        {
+            DIO.writeDI(Application.StartupPath + @"\PC\users\" + Tmp.user.User + @"\Desktop", dataSource);
+        }
+        #endregion
     }
 }

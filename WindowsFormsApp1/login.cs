@@ -124,7 +124,7 @@ namespace WindowsFormsApp1
 
         }
 
-        //登录界面
+        #region 登录界面
         private void loginBtn_Click(object sender, EventArgs e)
         {
             //判断密码
@@ -179,6 +179,7 @@ namespace WindowsFormsApp1
                 return b;
             }
         }
+        #endregion
 
         //关机菜单
         public int ShutTime=0;
