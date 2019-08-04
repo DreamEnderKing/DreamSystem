@@ -492,7 +492,45 @@ namespace WindowsFormsApp1
                     item.Save();
                 }
             }
-            #endregion
         #endregion
+        #region 图标创建
+        private void Desktop_Main_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effect = DragDropEffects.Link;
+            }
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+        private void Desktop_Main_DragDrop(object sender, DragEventArgs e)
+        {
+            string str = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+            e.Effect = DragDropEffects.None;
+            //创建控件
+            MainPart.DesktopIcon ico = new MainPart.DesktopIcon();
+            DIO.DI dI = new DIO.DI(str, Icon.ExtractAssociatedIcon(str).ToBitmap());
+            //文件功能
+            FileInfo file = new FileInfo(str);
+            dI.Name = file.Name.Substring(0, file.Name.Length - file.Extension.Length) + "-快捷方式";
+            dI.Source = file.Name;
+            dI.Target = file.FullName;
+            //位置功能
+            Point p = new Point(0, 0);
+            Desktop_Main.PointToScreen(p);
+            int x = e.X - p.X;
+            int y = e.Y - p.Y;
+            dI.X = (((x - 3) % 80) <= 40) ? (x - 3) / 80 : (x - 3) / 80 + 1;
+            dI.Y = (((y - 4) % 120) <= 60) ? (y - 3) / 120 : (y - 3) / 120 + 1;
+            ico.dataSource = dI;
+            Desktop_Main.Controls.Add(ico);
+        }
+
+        #endregion
+
+        #endregion
+
     }
 }

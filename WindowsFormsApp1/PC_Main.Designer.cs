@@ -249,11 +249,14 @@
             // 
             // Desktop_Main
             // 
+            this.Desktop_Main.AllowDrop = true;
             this.Desktop_Main.BackColor = System.Drawing.Color.Transparent;
             this.Desktop_Main.Location = new System.Drawing.Point(0, 0);
             this.Desktop_Main.Name = "Desktop_Main";
             this.Desktop_Main.Size = new System.Drawing.Size(1200, 600);
             this.Desktop_Main.TabIndex = 5;
+            this.Desktop_Main.DragDrop += new System.Windows.Forms.DragEventHandler(this.Desktop_Main_DragDrop);
+            this.Desktop_Main.DragEnter += new System.Windows.Forms.DragEventHandler(this.Desktop_Main_DragEnter);
             // 
             // PC_Main
             // 
