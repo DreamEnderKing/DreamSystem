@@ -102,7 +102,8 @@ namespace WindowsFormsApp1
                 char[] c = new char[it / 2];
                 for (int i = 0; i < it / 2; i++)
                 {
-                    c[i] = file.ReadChar();
+                    char s= file.ReadChar();
+                    c[i] = s;
                     file.ReadChar();
                 }
                 string str = new string(c);
@@ -128,6 +129,8 @@ namespace WindowsFormsApp1
                 string str = Application.StartupPath + @"\PC\temp\" + item.Source + ".gif";
                 File.Copy(filepath, str);
                 Bitmap bitmap = new Bitmap(str);
+                //去除图标黑斑
+                bitmap.MakeTransparent(Color.Black);
                 item.Icon = bitmap;
             }
 
@@ -144,10 +147,10 @@ namespace WindowsFormsApp1
                     //rw文件
                     string str = f.FullName.Substring(0, f.FullName.Length - 3);
                     DI dI = new DI("", new Bitmap(64, 64));
+                    dI.Source = f.Name.Substring(0, f.Name.Length - 3);
                     readDI(f.FullName, ref dI);
                     //rwp文件
                     readDI(str + ".rwp", ref dI);
-                    dI.Source = f.Name.Substring(0, f.Name.Length - 3);
                     list.Add(dI);
 
                 }
