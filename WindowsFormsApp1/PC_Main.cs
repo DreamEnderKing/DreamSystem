@@ -435,7 +435,7 @@ namespace WindowsFormsApp1
             #endregion
             private void settings_Click(object sender, EventArgs e)
             {
-                System.Diagnostics.Process.Start(Application.StartupPath + @"\control.exe");
+                System.Diagnostics.Process.Start(Application.StartupPath + @"\control.exe", Tmp.user.User);
             }
 
             private void task_Click(object sender, EventArgs e)
