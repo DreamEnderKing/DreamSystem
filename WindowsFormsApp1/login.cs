@@ -36,13 +36,61 @@ namespace WindowsFormsApp1
         {
             
         }
+        #region 登录
 
         public user[] UserList;
         public Bitmap[] UserIconList;
         public int UserIndex = 0;
         public int UserNumber = 0;
 
-        public temp Temp;
+        #region 基础
+        //登录按钮
+        private void login_Click(object sender, EventArgs e)
+        {
+            ShutTime = 0;
+            ShutMenu.Visible = false;
+            Shut.BorderStyle = BorderStyle.None;
+        }
+
+        //用户名翻页
+        private void forward_Click(object sender, EventArgs e)
+        {
+            userpass.Text = "";
+            int i = UserIndex;
+
+            if ((i+1)<=UserNumber)
+            {
+                UserIndex = i + 1;
+            }
+            else
+            {
+                UserIndex = 0;
+            }
+            username.Text = UserList[UserIndex].name;
+            user.Image = UserIconList[UserIndex];
+
+
+        }
+
+        private void back_Click(object sender, EventArgs e)
+        {
+            userpass.Text = "";
+            int i = UserIndex;
+
+            if ((i - 1) >= 0)
+            {
+                UserIndex = i - 1;
+            }
+            else
+            {
+                UserIndex = UserNumber;
+            }
+            username.Text = UserList[UserIndex].name;
+            user.Image = UserIconList[UserIndex];
+
+
+        }
+
         private void login_Load(object sender, EventArgs e)
         {
             //初始化环境
@@ -116,15 +164,14 @@ namespace WindowsFormsApp1
             }
             this.BackgroundImage = bitmap;
 
-
-
-
-
-
-
         }
 
-        #region 登录界面
+        #endregion
+
+        public temp Temp;
+        int err_time = 0;
+        DateTime err_start = new DateTime();
+
         private void loginBtn_Click(object sender, EventArgs e)
         {
             //判断密码
@@ -160,9 +207,42 @@ namespace WindowsFormsApp1
             }
             else
             {
-                usercon.Text = "密码错误！";
-                userpass.Text = "";
-                userpass.Focus();
+                err_time++;
+                err_start = DateTime.Now;
+                if (err_time >= 8)
+                {
+                    usercon.Text = "密码错误次数过多，即将关机！";
+                    //延时3秒
+                    int s = 0;
+                    do
+                    {
+                        TimeSpan span = DateTime.Now - err_start;
+                        s = span.Seconds;
+                        Application.DoEvents();
+                    }
+                    while (s <= 3);
+                    this.Close();
+                    (new Shutdown()).Show();
+                }
+                else if (err_time >= 3)
+                {
+                    usercon.Text = "密码错误次数过多，请等待30秒！";
+                    //延时30秒
+                    int s = 0;
+                    do
+                    {
+                        TimeSpan span = DateTime.Now - err_start;
+                        s = span.Seconds;
+                        Application.DoEvents();
+                    }
+                    while (s <= 30);
+                }
+                else
+                {
+                    usercon.Text = "密码错误！";
+                    userpass.Text = "";
+                    userpass.Focus();
+                }
             }
         }
 
@@ -181,7 +261,7 @@ namespace WindowsFormsApp1
         }
         #endregion
 
-        //关机菜单
+        #region 关机菜单
         public int ShutTime=0;
         private void Shut_Click(object sender, EventArgs e)
         {
@@ -198,52 +278,6 @@ namespace WindowsFormsApp1
                 Shut.BorderStyle = BorderStyle.None ;
 
             }
-        }
-        //登录按钮
-        private void login_Click(object sender, EventArgs e)
-        {
-            ShutTime = 0;
-            ShutMenu.Visible = false;
-            Shut.BorderStyle = BorderStyle.None;
-        }
-
-        //用户名翻页
-        private void forward_Click(object sender, EventArgs e)
-        {
-            userpass.Text = "";
-            int i = UserIndex;
-
-            if ((i+1)<=UserNumber)
-            {
-                UserIndex = i + 1;
-            }
-            else
-            {
-                UserIndex = 0;
-            }
-            username.Text = UserList[UserIndex].name;
-            user.Image = UserIconList[UserIndex];
-
-
-        }
-
-        private void back_Click(object sender, EventArgs e)
-        {
-            userpass.Text = "";
-            int i = UserIndex;
-
-            if ((i - 1) >= 0)
-            {
-                UserIndex = i - 1;
-            }
-            else
-            {
-                UserIndex = UserNumber;
-            }
-            username.Text = UserList[UserIndex].name;
-            user.Image = UserIconList[UserIndex];
-
-
         }
 
         private void shut1_MouseEnter(object sender, EventArgs e)
@@ -381,5 +415,8 @@ namespace WindowsFormsApp1
         {
             sleep.Visible = false;
         }
+
+        #endregion
+
     }
 }

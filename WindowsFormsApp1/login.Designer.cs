@@ -256,9 +256,9 @@
             this.usercon.BackColor = System.Drawing.Color.Transparent;
             this.usercon.Font = new System.Drawing.Font("宋体", 60F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, ((byte)(134)));
             this.usercon.ForeColor = System.Drawing.Color.White;
-            this.usercon.Location = new System.Drawing.Point(402, 23);
+            this.usercon.Location = new System.Drawing.Point(100, 20);
             this.usercon.Name = "usercon";
-            this.usercon.Size = new System.Drawing.Size(395, 74);
+            this.usercon.Size = new System.Drawing.Size(1000, 80);
             this.usercon.TabIndex = 18;
             this.usercon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 

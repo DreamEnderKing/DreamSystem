@@ -432,16 +432,18 @@ namespace WindowsFormsApp1
                 }
             }
 
-            #endregion
+        #endregion
+            #region 左边栏管理
             private void settings_Click(object sender, EventArgs e)
-            {
-                System.Diagnostics.Process.Start(Application.StartupPath + @"\control.exe", Tmp.user.User);
-            }
+                {
+                    System.Diagnostics.Process.Start(Application.StartupPath + @"\control.exe", Tmp.user.User);
+                }
 
-            private void task_Click(object sender, EventArgs e)
-            {
+                private void task_Click(object sender, EventArgs e)
+                {
 
-            }
+                }
+            #endregion
         #endregion
 
         private void PC_Main_FormClosing(object sender, FormClosingEventArgs e)
