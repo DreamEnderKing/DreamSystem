@@ -153,18 +153,6 @@ namespace WindowsFormsApp1.MainPart
                 DialogResult result = MessageBox.Show("指定的文件不存在！\n是否删除图标？", "Dream PC1.0", MessageBoxButtons.YesNo);
                 if(result==DialogResult.Yes)
                 {
-                    //删除该快捷方式
-                    /*
-                    try
-                    {
-                        File.Delete(Application.StartupPath + @"\PC\users\" + Tmp.user.User + @"\Desktop\" + dataSource.Source + ".rw");
-                        File.Delete(Application.StartupPath + @"\PC\users\" + Tmp.user.User + @"\Desktop\" + dataSource.Source + ".rwp");
-                    }
-                    catch(Exception err)
-                    {
-                        MessageBox.Show(err.Message, "Dream PC", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    */
                     //删除本图标
                     Dispose();
                 }

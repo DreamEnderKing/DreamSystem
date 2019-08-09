@@ -480,7 +480,8 @@ namespace WindowsFormsApp1
                     Desktop_Main.Controls.Add(desktopIcon);
                 
                 }
-                #endregion
+            #endregion
+                Desktop_SystemIcon_Load();
             }
             #region 图标退出
             private void Desktop_Exit()
@@ -495,41 +496,74 @@ namespace WindowsFormsApp1
                 }
             }
         #endregion
-        #region 图标创建
-        private void Desktop_Main_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            #region 图标创建
+            private void Desktop_Main_DragEnter(object sender, DragEventArgs e)
             {
-                e.Effect = DragDropEffects.Link;
+                if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    e.Effect = DragDropEffects.Link;
+                }
+                else
+                {
+                    e.Effect = DragDropEffects.None;
+                }
+            }
+
+            private void Desktop_Main_DragDrop(object sender, DragEventArgs e)
+            {
+                string str = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
+                e.Effect = DragDropEffects.None;
+                //创建控件
+                MainPart.DesktopIcon ico = new MainPart.DesktopIcon();
+                DIO.DI dI = new DIO.DI(str, Icon.ExtractAssociatedIcon(str).ToBitmap());
+                //文件功能
+                FileInfo file = new FileInfo(str);
+                dI.Name = file.Name.Substring(0, file.Name.Length - file.Extension.Length);
+                dI.Source = file.Name.Substring(0, file.Name.Length - file.Extension.Length);
+                dI.Target = file.FullName;
+                //位置功能
+                Point po = new Point(e.X, e.Y);
+                Point p = Desktop_Main.PointToClient(po);
+                int x = p.X;
+                int y = p.Y;
+                dI.X = (((x - 3) % 80) <= 40) ? (x - 3) / 80 : (x - 3) / 80 + 1;
+                dI.Y = (((y - 4) % 120) <= 60) ? (y - 3) / 120 : (y - 3) / 120 + 1;
+                ico.dataSource = dI;
+                Desktop_Main.Controls.Add(ico);
+            }
+
+        #endregion
+        #region 系统图标
+        private void Desktop_SystemIcon_Load()
+        {
+            string str = Application.StartupPath + @"\PC\users\" + Temp.User + @"\Desktop\SystemIcon";
+            if (!File.Exists(str+".dll"))
+            {
+                MessageBox.Show("该用户文件已损坏", "Dream PC 1.0", MessageBoxButtons.OK);
             }
             else
             {
-                e.Effect = DragDropEffects.None;
+                File.Copy(str + ".dll", str + ".xml");
+                XmlDocument xml = new XmlDocument();
+                xml.Load(str + ".xml");
+                XmlNodeList nodes = xml.SelectNodes("icons/icon");
+                foreach (XmlNode nitem in nodes)
+                {
+                    XmlElement item = (XmlElement)nitem;
+                    string name = item.GetAttribute("name");
+                    string sstart= item.GetAttribute("start");
+                    bool start = (sstart == "true") ? true : false;
+                    switch (name)
+                    {
+                        default:
+                            Console.WriteLine(name);
+                            break;
+                    }
+
+                }
+                File.Delete(str + ".xml");
             }
         }
-        private void Desktop_Main_DragDrop(object sender, DragEventArgs e)
-        {
-            string str = ((Array)e.Data.GetData(DataFormats.FileDrop)).GetValue(0).ToString();
-            e.Effect = DragDropEffects.None;
-            //创建控件
-            MainPart.DesktopIcon ico = new MainPart.DesktopIcon();
-            DIO.DI dI = new DIO.DI(str, Icon.ExtractAssociatedIcon(str).ToBitmap());
-            //文件功能
-            FileInfo file = new FileInfo(str);
-            dI.Name = file.Name.Substring(0, file.Name.Length - file.Extension.Length);
-            dI.Source = file.Name;
-            dI.Target = file.FullName;
-            //位置功能
-            Point po = new Point(e.X, e.Y);
-            Point p = Desktop_Main.PointToClient(po);
-            int x = p.X;
-            int y = p.Y;
-            dI.X = (((x - 3) % 80) <= 40) ? (x - 3) / 80 : (x - 3) / 80 + 1;
-            dI.Y = (((y - 4) % 120) <= 60) ? (y - 3) / 120 : (y - 3) / 120 + 1;
-            ico.dataSource = dI;
-            Desktop_Main.Controls.Add(ico);
-        }
-
         #endregion
 
         #endregion

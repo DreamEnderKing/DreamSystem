@@ -113,6 +113,11 @@
     <Compile Include="MainPart\DesktopIcon.Designer.cs">
       <DependentUpon>DesktopIcon.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainPart\SystemIcon.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SystemIcon.resx</DependentUpon>
+    </Compile>
     <Compile Include="Shutdown.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +144,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainPart\DesktopIcon.resx">
       <DependentUpon>DesktopIcon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainPart\SystemIcon.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SystemIcon.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Shutdown.resx">
       <DependentUpon>Shutdown.cs</DependentUpon>
@@ -210,6 +219,12 @@
     <Content Include="Help\桌面.txt" />
     <Content Include="Help\目标.txt" />
     <Content Include="Others\icon.ico" />
+    <None Include="Resources\UserFolder.gif" />
+    <None Include="Resources\Bin_Full.gif" />
+    <None Include="Resources\Bin_Empty.gif" />
+    <None Include="Resources\VS002.gif" />
+    <None Include="Resources\VS001.gif" />
+    <None Include="Resources\ICON_5325.ico" />
     <None Include="Resources\1.gif" />
     <None Include="Resources\lock.jpg" />
     <None Include="Resources\back.jpg" />
