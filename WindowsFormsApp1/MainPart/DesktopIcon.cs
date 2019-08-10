@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Xml;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -23,10 +24,12 @@ namespace WindowsFormsApp1.MainPart
         #region 主工作区
         private void DesktopIcon_Load(object sender, EventArgs e)
         {
+            i = 1;
             LoadAsync();
+            Tmp.DesktopTempData.IconUsed[dataSource.X, dataSource.Y] = 1;
         }
 
-        private async Task LoadAsync()
+        protected virtual async Task LoadAsync()
         {
             //初始化框架
             Width = 74;
@@ -108,10 +111,16 @@ namespace WindowsFormsApp1.MainPart
             origin = new Point(e.X, e.Y);
         }
 
+        public int i { get; set; }
+
         private void DesktopIcon_MouseUp(object sender, MouseEventArgs e)
         {
+            
             moving = false;
             #region 移动定位
+            //存储旧位置
+            int x = dataSource.X;
+            int y = dataSource.Y;
             //模糊控制
             int l = Left - 3;
             int t = Top - 4;
@@ -119,9 +128,23 @@ namespace WindowsFormsApp1.MainPart
             int yt = t % 120;
             dataSource.X = (xt <= 40) ? (Left - 3) / 80 : (Left - 3) / 80 + 1;
             dataSource.Y = (yt <= 60) ? (Top - 3) / 120 : (Top - 3) / 120 + 1;
-            //启用更改
-            LoadAsync();
-            timer1.Enabled = true;
+            //检查重复
+            if (Tmp.DesktopTempData.IconUsed[dataSource.X, dataSource.Y] == 0)
+            {
+                //启用更改
+                LoadAsync();
+                timer1.Enabled = true;
+                Tmp.DesktopTempData.IconUsed[x, y] = 0;
+                Tmp.DesktopTempData.IconUsed[dataSource.X, dataSource.Y] = i;
+            }
+            else
+            {
+                //恢复原状
+                dataSource.X = x;
+                dataSource.Y = y;
+                LoadAsync();
+                timer1.Enabled = true;
+            }
             #endregion
             #region 写入更改
             Save();
@@ -163,10 +186,86 @@ namespace WindowsFormsApp1.MainPart
             }
         }
 
-        public void Save()
+        public virtual void Save()
         {
             DIO.writeDI(Application.StartupPath + @"\PC\users\" + Tmp.user.User + @"\Desktop", dataSource);
         }
         #endregion
+    }
+
+    public class DesktopSystemIcon : DesktopIcon
+    {
+        
+
+        public enum SystemIconType
+        {
+            explorer = 0,
+            control  = 1,
+            user     = 2,
+            bin      = 3
+        }
+
+        public SystemIconType IconType{ get; set;}
+
+        //根据类型写图标、定名称
+        protected override Task LoadAsync()
+        {
+            i = 2;
+            switch (IconType)
+            {
+                case SystemIconType.explorer:
+                    dataSource.Icon = MainPart.SystemIcon.Explorer;
+                    dataSource.Name = "我的电脑";
+                    break;
+                case SystemIconType.control:
+                    dataSource.Icon = MainPart.SystemIcon.Control;
+                    dataSource.Name = "设置";
+                    break;
+                case SystemIconType.user:
+                    dataSource.Icon = MainPart.SystemIcon.UserFolder;
+                    dataSource.Name = Tmp.user.User;
+                    break;
+                case SystemIconType.bin:
+                    dataSource.Icon = MainPart.SystemIcon.Bin_Empty;
+                    dataSource.Name = "回收站";
+                    break;
+                default:
+                    break;
+            }
+            return base.LoadAsync();
+        }
+
+        //写入xml
+        public override void Save()
+        {
+            string str = Application.StartupPath + @"\PC\users\" + Tmp.user.User + @"\Desktop\SystemIcon";
+            if (!File.Exists(str + ".dll"))
+            {
+                MessageBox.Show("该用户文件已损坏", "Dream PC 1.0", MessageBoxButtons.OK);
+            }
+            else
+            {
+                File.Copy(str + ".dll", str + ".xml");
+                XmlDocument xml = new XmlDocument();
+                xml.Load(str + ".xml");
+                XmlNodeList nodes = xml.SelectNodes("icons/icon");
+                foreach (XmlNode nitem in nodes)
+                {
+                    XmlElement item = (XmlElement)nitem;
+                    string name = item.GetAttribute("name");
+                    if(IconType.ToString()==name)
+                    {
+                        item.SetAttribute("x", dataSource.X.ToString());
+                        item.SetAttribute("y", dataSource.Y.ToString());
+                    }
+
+                }
+                xml.Save(str + ".xml");
+
+                File.Copy(str + ".xml", str + ".dll", true);
+                File.Delete(str + ".xml");
+            }
+
+        }
     }
 }

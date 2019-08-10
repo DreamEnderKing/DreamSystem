@@ -488,7 +488,7 @@ namespace WindowsFormsApp1
             {
                 foreach (FileInfo item in (new DirectoryInfo(Application.StartupPath + @"\PC\users\" + Temp.User + @"\Desktop")).EnumerateFiles())
                 {
-                    item.Delete();
+                    if(!(item.Name=="systemicon.dll")) item.Delete();
                 }
                 foreach (MainPart.DesktopIcon item in Desktop_Main.Controls)
                 {
@@ -533,38 +533,62 @@ namespace WindowsFormsApp1
             }
 
         #endregion
-        #region 系统图标
-        private void Desktop_SystemIcon_Load()
-        {
-            string str = Application.StartupPath + @"\PC\users\" + Temp.User + @"\Desktop\SystemIcon";
-            if (!File.Exists(str+".dll"))
+            #region 系统图标
+            private void Desktop_SystemIcon_Load()
             {
-                MessageBox.Show("该用户文件已损坏", "Dream PC 1.0", MessageBoxButtons.OK);
-            }
-            else
-            {
-                File.Copy(str + ".dll", str + ".xml");
-                XmlDocument xml = new XmlDocument();
-                xml.Load(str + ".xml");
-                XmlNodeList nodes = xml.SelectNodes("icons/icon");
-                foreach (XmlNode nitem in nodes)
+                string str = Application.StartupPath + @"\PC\users\" + Temp.User + @"\Desktop\SystemIcon";
+                if (!File.Exists(str+".dll"))
                 {
-                    XmlElement item = (XmlElement)nitem;
-                    string name = item.GetAttribute("name");
-                    string sstart= item.GetAttribute("start");
-                    bool start = (sstart == "true") ? true : false;
-                    switch (name)
-                    {
-                        default:
-                            Console.WriteLine(name);
-                            break;
-                    }
-
+                    MessageBox.Show("该用户文件已损坏", "Dream PC 1.0", MessageBoxButtons.OK);
                 }
-                File.Delete(str + ".xml");
+                else
+                {
+                    File.Copy(str + ".dll", str + ".xml");
+                    XmlDocument xml = new XmlDocument();
+                    xml.Load(str + ".xml");
+                    XmlNodeList nodes = xml.SelectNodes("icons/icon");
+                    foreach (XmlNode nitem in nodes)
+                    {
+                        XmlElement item = (XmlElement)nitem;
+                        string name = item.GetAttribute("name");
+                        string sstart= item.GetAttribute("start");
+                        bool start = (sstart == "true") ? true : false;
+                        if (start)
+                        {
+                            MainPart.DesktopSystemIcon icon = new MainPart.DesktopSystemIcon();
+                            DIO.DI dI = new DIO.DI(name, new Bitmap(256, 256));
+                            switch (name)
+                            {
+                                case "explorer":
+                                    icon.IconType = MainPart.DesktopSystemIcon.SystemIconType.explorer;
+                                    break;
+                                case "control":
+                                    icon.IconType = MainPart.DesktopSystemIcon.SystemIconType.control;
+                                    break;
+                                case "user":
+                                    icon.IconType = MainPart.DesktopSystemIcon.SystemIconType.user;
+                                    break;
+                                case "bin":
+                                    icon.IconType = MainPart.DesktopSystemIcon.SystemIconType.bin;
+                                    break;
+                                default:
+                                    Console.WriteLine(name);
+                                    break;
+                            }
+                            int x = int.Parse(item.GetAttribute("x"));
+                            dI.X = (x < 15) ? x : 15;
+                            int y = int.Parse(item.GetAttribute("y"));
+                            dI.Y = (y < 5) ? y : 4;
+                            icon.dataSource = dI;
+                            Desktop_Main.Controls.Add(icon);
+
+                        }
+
+                    }
+                    File.Delete(str + ".xml");
+                }
             }
-        }
-        #endregion
+            #endregion
 
         #endregion
 

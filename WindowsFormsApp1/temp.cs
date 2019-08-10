@@ -17,6 +17,14 @@ namespace WindowsFormsApp1
     public static class Tmp
     {
         public static temp user = new temp();
+
+        public static class DesktopTempData
+        {
+            /// <summary>
+            /// 1：普通图标；2：系统图标
+            /// </summary>
+            public static int[,] IconUsed = new int[15,5];
+        }
     }
 
     public class temp
