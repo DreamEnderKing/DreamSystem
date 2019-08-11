@@ -112,6 +112,7 @@ namespace WindowsFormsApp1.MainPart
         }
 
         public int i { get; set; }
+        public bool isBin = false;
 
         private void DesktopIcon_MouseUp(object sender, MouseEventArgs e)
         {
@@ -137,7 +138,7 @@ namespace WindowsFormsApp1.MainPart
                 Tmp.DesktopTempData.IconUsed[x, y] = 0;
                 Tmp.DesktopTempData.IconUsed[dataSource.X, dataSource.Y] = i;
             }
-            else if(Tmp.DesktopTempData.IconUsed[dataSource.X,dataSource.Y]==5)
+            else if(Tmp.DesktopTempData.IconUsed[dataSource.X,dataSource.Y]==5 & !isBin)
             {
                 //回收图标
                 DesktopSystemIcon ico = (DesktopSystemIcon)((PC_Main)FindForm()).GetDesktopIcon(dataSource.X, dataSource.Y);
@@ -237,6 +238,7 @@ namespace WindowsFormsApp1.MainPart
                 case SystemIconType.bin:
                     dataSource.Icon = (!full) ? MainPart.SystemIcon.Bin_Empty : MainPart.SystemIcon.Bin_Full;
                     dataSource.Name = "回收站";
+                    isBin = true;
                     i = 5;
                     break;
                 default:
