@@ -21,9 +21,11 @@ namespace WindowsFormsApp1
         public static class DesktopTempData
         {
             /// <summary>
-            /// 1：普通图标；2：系统图标
+            /// 1：普通图标；
+            /// explorer = 2,control  = 3,user = 4,bin = 5
             /// </summary>
             public static int[,] IconUsed = new int[15,5];
+
         }
     }
 

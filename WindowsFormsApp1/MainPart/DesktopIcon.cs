@@ -26,7 +26,7 @@ namespace WindowsFormsApp1.MainPart
         {
             i = 1;
             LoadAsync();
-            Tmp.DesktopTempData.IconUsed[dataSource.X, dataSource.Y] = 1;
+            Tmp.DesktopTempData.IconUsed[dataSource.X, dataSource.Y] = i;
         }
 
         protected virtual async Task LoadAsync()
@@ -137,6 +137,13 @@ namespace WindowsFormsApp1.MainPart
                 Tmp.DesktopTempData.IconUsed[x, y] = 0;
                 Tmp.DesktopTempData.IconUsed[dataSource.X, dataSource.Y] = i;
             }
+            else if(Tmp.DesktopTempData.IconUsed[dataSource.X,dataSource.Y]==5)
+            {
+                //回收图标
+                DesktopSystemIcon ico = (DesktopSystemIcon)((PC_Main)FindForm()).GetDesktopIcon(dataSource.X, dataSource.Y);
+                ico.AddIn();
+                Dispose();
+            }
             else
             {
                 //恢复原状
@@ -210,24 +217,27 @@ namespace WindowsFormsApp1.MainPart
         //根据类型写图标、定名称
         protected override Task LoadAsync()
         {
-            i = 2;
             switch (IconType)
             {
                 case SystemIconType.explorer:
                     dataSource.Icon = MainPart.SystemIcon.Explorer;
                     dataSource.Name = "我的电脑";
+                    i = 2;
                     break;
                 case SystemIconType.control:
                     dataSource.Icon = MainPart.SystemIcon.Control;
                     dataSource.Name = "设置";
+                    i = 3;
                     break;
                 case SystemIconType.user:
                     dataSource.Icon = MainPart.SystemIcon.UserFolder;
                     dataSource.Name = Tmp.user.User;
+                    i = 4;
                     break;
                 case SystemIconType.bin:
-                    dataSource.Icon = MainPart.SystemIcon.Bin_Empty;
+                    dataSource.Icon = (!full) ? MainPart.SystemIcon.Bin_Empty : MainPart.SystemIcon.Bin_Full;
                     dataSource.Name = "回收站";
+                    i = 5;
                     break;
                 default:
                     break;
@@ -267,5 +277,16 @@ namespace WindowsFormsApp1.MainPart
             }
 
         }
+
+        #region bin
+        bool full = false;
+        public void AddIn()
+        {
+            if (IconType == SystemIconType.bin)
+            {
+                full = true;
+            }
+        }
+        #endregion
     }
 }

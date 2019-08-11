@@ -483,19 +483,41 @@ namespace WindowsFormsApp1
             #endregion
                 Desktop_SystemIcon_Load();
             }
+            #region 图标环境
+            public MainPart.DesktopIcon GetDesktopIcon(int x, int y)
+            {
+                MainPart.DesktopIcon icon = new MainPart.DesktopIcon();
+                if (Tmp.DesktopTempData.IconUsed[x, y] != 0)
+                {
+                    foreach (MainPart.DesktopIcon ico in Desktop_Main.Controls)
+                    {
+                        if(ico.dataSource.X==x & ico.dataSource.Y==y)
+                        {
+                            icon = ico;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("There is no icon at the position.");
+                }
+                return icon;
+            }
+
+            #endregion
             #region 图标退出
             private void Desktop_Exit()
-            {
-                foreach (FileInfo item in (new DirectoryInfo(Application.StartupPath + @"\PC\users\" + Temp.User + @"\Desktop")).EnumerateFiles())
-                {
-                    if(!(item.Name=="systemicon.dll")) item.Delete();
-                }
-                foreach (MainPart.DesktopIcon item in Desktop_Main.Controls)
-                {
-                    item.Save();
-                }
-            }
-        #endregion
+                    {
+                        foreach (FileInfo item in (new DirectoryInfo(Application.StartupPath + @"\PC\users\" + Temp.User + @"\Desktop")).EnumerateFiles())
+                        {
+                            if(!(item.Name=="systemicon.dll")) item.Delete();
+                        }
+                        foreach (MainPart.DesktopIcon item in Desktop_Main.Controls)
+                        {
+                            item.Save();
+                        }
+                    }
+                #endregion
             #region 图标创建
             private void Desktop_Main_DragEnter(object sender, DragEventArgs e)
             {
@@ -543,7 +565,7 @@ namespace WindowsFormsApp1
                 }
                 else
                 {
-                    File.Copy(str + ".dll", str + ".xml");
+                    File.Copy(str + ".dll", str + ".xml", true);
                     XmlDocument xml = new XmlDocument();
                     xml.Load(str + ".xml");
                     XmlNodeList nodes = xml.SelectNodes("icons/icon");
