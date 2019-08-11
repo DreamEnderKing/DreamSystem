@@ -222,7 +222,6 @@
     <None Include="Resources\Bin_Empty.png" />
     <None Include="Resources\UserFolder.gif" />
     <None Include="Resources\Bin_Full.gif" />
-    <None Include="Resources\Bin_Empty.gif" />
     <None Include="Resources\VS002.gif" />
     <None Include="Resources\VS001.gif" />
     <None Include="Resources\ICON_5325.ico" />
