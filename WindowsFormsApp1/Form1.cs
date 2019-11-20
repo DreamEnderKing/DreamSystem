@@ -71,7 +71,7 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            button1.Controls.Add(new MainPart.RightKeyMenu(button1));
+
         }
 
         private void button3_Click(object sender, EventArgs e)
