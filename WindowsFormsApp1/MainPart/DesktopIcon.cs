@@ -157,6 +157,7 @@ namespace WindowsFormsApp1.MainPart
             #region 写入更改
             Save();
             #endregion
+            this.Parent.Update();
         }
 
         Point origin = new Point(0, 0);
@@ -191,6 +192,8 @@ namespace WindowsFormsApp1.MainPart
             else
             {
                 Process.Start(dataSource.Target);
+                Controls.Add(new MainPart.RightKeyMenu(this));
+
             }
         }
 

@@ -31,6 +31,13 @@ namespace WindowsFormsApp1
         {
             Temp = Tm;
             InitializeComponent();
+            this.DoubleBuffered = true;//设置本窗体
+            SetStyle(ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true); // 禁止擦除背景.
+            SetStyle(ControlStyles.DoubleBuffer, true); // 双缓冲
+                                                        //SetStyle(ControlStyles.DoubleBuffer | ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
+
+            UpdateStyles();
         }
 
         private void PC_Main_FormClosed(object sender, FormClosedEventArgs e)
@@ -458,6 +465,7 @@ namespace WindowsFormsApp1
                 ArrayList DI_List = new ArrayList();
                 DirectoryInfo d = new DirectoryInfo(Application.StartupPath + @"\PC\users\" + Temp.User + @"\Desktop");
                 
+            /*
                 Bitmap btemp = new Bitmap(@"E:\3.gif");
                 DIO.DI dI = new DIO.DI("aaa", btemp);
                 dI.X = 2;
@@ -465,6 +473,7 @@ namespace WindowsFormsApp1
                 dI.Target = "E:\\keyascii.exe";
                 dI.Source = "aaxc";
                 DIO.writeDI(d.FullName, dI);
+                */
                 
                 DIO.readDIs(d, out DI_List);
                 Console.WriteLine(((DIO.DI)DI_List[0]).Target);
@@ -610,8 +619,18 @@ namespace WindowsFormsApp1
                     File.Delete(str + ".xml");
                 }
             }
-            #endregion
+        #endregion
 
+
+        #endregion
+
+        #region 全局设置
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0014) // 禁掉清除背景消息
+                return;
+            base.WndProc(ref m);
+        }
         #endregion
 
     }

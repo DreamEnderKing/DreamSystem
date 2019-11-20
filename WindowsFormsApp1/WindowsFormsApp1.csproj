@@ -55,9 +55,6 @@
     <ManifestCertificateThumbprint>21A7B18BEF4BF43E3415AFA91E30476F0EAAB937</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>WindowsFormsApp1_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup>
@@ -72,7 +69,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'UnsafeDebug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\UnsafeDebug\</OutputPath>
+    <OutputPath>C:\bin\UnsafeDebug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -82,10 +79,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MyControls, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\UnsafeDebug\PC\public\localRoot\MyControls.dll</HintPath>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
+    <Reference Include="MyControls">
+      <HintPath>MyControls.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -112,6 +108,12 @@
     </Compile>
     <Compile Include="MainPart\DesktopIcon.Designer.cs">
       <DependentUpon>DesktopIcon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainPart\RightKeyMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainPart\RightKeyMenu.Designer.cs">
+      <DependentUpon>RightKeyMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="MainPart\SystemIcon.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -144,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainPart\DesktopIcon.resx">
       <DependentUpon>DesktopIcon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainPart\RightKeyMenu.resx">
+      <DependentUpon>RightKeyMenu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainPart\SystemIcon.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -178,7 +183,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="WindowsFormsApp1_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
