@@ -458,6 +458,7 @@ namespace WindowsFormsApp1
                 ArrayList DI_List = new ArrayList();
                 DirectoryInfo d = new DirectoryInfo(Application.StartupPath + @"\PC\users\" + Temp.User + @"\Desktop");
                 
+            /*
                 Bitmap btemp = new Bitmap(@"E:\3.gif");
                 DIO.DI dI = new DIO.DI("aaa", btemp);
                 dI.X = 2;
@@ -465,7 +466,7 @@ namespace WindowsFormsApp1
                 dI.Target = "E:\\keyascii.exe";
                 dI.Source = "aaxc";
                 DIO.writeDI(d.FullName, dI);
-                
+                */
                 DIO.readDIs(d, out DI_List);
                 Console.WriteLine(((DIO.DI)DI_List[0]).Target);
                 #endregion
