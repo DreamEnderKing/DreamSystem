@@ -28,6 +28,8 @@ namespace WindowsFormsApp1
             time = int.Parse(element.InnerText);
         }
 
+        //执行开机秒数
+        int rest = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
 
@@ -36,6 +38,8 @@ namespace WindowsFormsApp1
         private void StartManager_Load(object sender, EventArgs e)
         {
             setTime();
+            rest = time;
+            timer1.Enabled = true;
         }
     }
 }
