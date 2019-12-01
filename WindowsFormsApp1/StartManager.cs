@@ -37,7 +37,7 @@ namespace WindowsFormsApp1
                 timer1.Enabled = false;
                 return;
             }
-            rest -= rest;s
+            rest -= rest;
         }
 
         private void StartManager_Load(object sender, EventArgs e)
