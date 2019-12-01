@@ -20,7 +20,7 @@ namespace WindowsFormsApp1
 
         //获取开机秒数
         int time = 0;
-        private void getTime()
+        private void setTime()
         {
             XmlDocument xml = new XmlDocument();
             xml.Load(Application.StartupPath + "\\PC\\start\\start.xml");
@@ -35,7 +35,7 @@ namespace WindowsFormsApp1
 
         private void StartManager_Load(object sender, EventArgs e)
         {
-            getTime();
+            setTime();
         }
     }
 }
