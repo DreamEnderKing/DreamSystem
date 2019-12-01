@@ -32,7 +32,12 @@ namespace WindowsFormsApp1
         int rest = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
-
+            if(rest==0)
+            {
+                timer1.Enabled = false;
+                return;
+            }
+            rest -= rest;s
         }
 
         private void StartManager_Load(object sender, EventArgs e)
