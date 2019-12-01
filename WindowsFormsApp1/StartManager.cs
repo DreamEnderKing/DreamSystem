@@ -24,9 +24,8 @@ namespace WindowsFormsApp1
         {
             XmlDocument xml = new XmlDocument();
             xml.Load(Application.StartupPath + "\\PC\\start\\start.xml");
-            XmlElement element = (XmlElement)xml.SelectSingleNode("start\\configure\\time");
-            time = element.GetAttribute("value").Length;
-            MessageBox.Show(time.ToString());
+            XmlElement element = (XmlElement)xml.DocumentElement.SelectSingleNode("prop[@id='time']");
+            time = int.Parse(element.InnerText);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
