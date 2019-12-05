@@ -35,9 +35,11 @@ namespace WindowsFormsApp1
             if(rest==0)
             {
                 timer1.Enabled = false;
+                Start();
                 return;
             }
-            rest -= rest;
+            rest -= 1;
+            label4.Text = rest.ToString();
         }
 
         private void StartManager_Load(object sender, EventArgs e)
@@ -45,6 +47,12 @@ namespace WindowsFormsApp1
             setTime();
             rest = time;
             timer1.Enabled = true;
+        }
+
+        private void Start()
+        {
+            new login().Show();
+            Hide();
         }
     }
 }
