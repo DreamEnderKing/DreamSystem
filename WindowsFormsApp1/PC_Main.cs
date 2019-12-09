@@ -467,7 +467,6 @@ namespace WindowsFormsApp1
                 DIO.writeDI(d.FullName, dI);		
                 */                
                 DIO.readDIs(d, out DI_List);
-                Console.WriteLine(((DIO.DI)DI_List[0]).Target);
                 #endregion
                 #region Draw DesktopIcons
                 foreach (DIO.DI i in DI_List)
@@ -610,7 +609,58 @@ namespace WindowsFormsApp1
                     File.Delete(str + ".xml");
                 }
             }
-            #endregion
+        #endregion
+
+        #endregion
+
+        #region 关机菜单组
+
+        #region 关机区域
+
+        Color grey = Color.FromArgb(100, 100, 100);
+
+        private void shutMenu_Btn_MouseEnter(object sender, EventArgs e)
+        {
+            shutMenu_Btn.BackColor = Color.FromArgb(50, grey);
+        }
+
+        private void shutMenu_Btn_MouseHover(object sender, EventArgs e)
+        {
+
+        }
+        private void shutMenu_Btn_MouseLeave(object sender, EventArgs e)
+        {
+            shutMenu_Btn.BackColor = Color.FromArgb(0, grey);
+        }
+        #endregion
+
+        #region 关机按钮
+        private void shutMenu_Btn_img_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+        private void shutMenu_Btn_img_MouseMove(object sender, MouseEventArgs e)
+        {
+
+        }
+        private void shutMenu_Btn_img_MouseUp(object sender, MouseEventArgs e)
+        {
+
+        }
+        private void shutMenu_Btn_img_Paint(object sender, PaintEventArgs e)
+        {
+            if (shutMenu_Btn.BackColor.A == 0)
+            {
+                shutMenu_Btn_img.Visible = false;
+            }
+            else
+            {
+                shutMenu_Btn_img.Visible = true;
+                shutMenu_Btn_img.BackColor = Color.FromArgb(shutMenu_Btn.BackColor.A + 50, shutMenu_Btn.BackColor);
+
+            }
+        }
+        #endregion
 
         #endregion
 
