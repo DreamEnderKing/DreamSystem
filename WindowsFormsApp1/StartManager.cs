@@ -46,6 +46,7 @@ namespace WindowsFormsApp1
         {
             setTime();
             rest = time;
+            label4.Text = rest.ToString();
             timer1.Enabled = true;
         }
 

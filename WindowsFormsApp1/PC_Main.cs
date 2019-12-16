@@ -618,48 +618,75 @@ namespace WindowsFormsApp1
         #region 关机区域
 
         Color grey = Color.FromArgb(100, 100, 100);
+        int alpha = 0;
+        bool left = true;
+        Image img;
+        bool imgChanged = false;
 
         private void shutMenu_Btn_MouseEnter(object sender, EventArgs e)
         {
-            shutMenu_Btn.BackColor = Color.FromArgb(50, grey);
+            alpha = 50;
+            if (imgChanged) shutMenu_Btn.BackgroundImage = img;
+            imgChanged = false;
+            left = false;
         }
 
         private void shutMenu_Btn_MouseHover(object sender, EventArgs e)
         {
-
+        	while(alpha<=225)
+        	{
+                if (left) break;
+        		alpha+=5;
+                shutMenu_Btn_Paint();
+        		DateTime now = DateTime.Now;
+        		while((DateTime.Now - now).Milliseconds<=100)
+        		{
+        			Application.DoEvents();
+        		}
+        	}
         }
         private void shutMenu_Btn_MouseLeave(object sender, EventArgs e)
         {
-            shutMenu_Btn.BackColor = Color.FromArgb(0, grey);
+            //Save the image
+            img = shutMenu_Btn.BackgroundImage;
+            left = true;
+            alpha = 1;
+            shutMenu_Btn_Paint();
+            shutMenu_Btn.BackgroundImage = new Bitmap(img.Width, img.Height);
+            imgChanged = true;
         }
-        #endregion
-
-        #region 关机按钮
-        private void shutMenu_Btn_img_MouseDown(object sender, MouseEventArgs e)
+        
+        private void shutMenu_Btn_Paint()
         {
-
+            shutMenu_Btn.BackColor = Color.FromArgb(alpha, grey);
+            Desktop_Main.Update();
         }
-        private void shutMenu_Btn_img_MouseMove(object sender, MouseEventArgs e)
-        {
 
-        }
-        private void shutMenu_Btn_img_MouseUp(object sender, MouseEventArgs e)
+        bool isPushed = false;
+        private void shutMenu_Btn_MouseDown(object sender, MouseEventArgs e)
         {
+            isPushed = true;
+            alpha = 225;
+            shutMenu_Btn_Paint();
+            x = e.X;
+        }
 
-        }
-        private void shutMenu_Btn_img_Paint(object sender, PaintEventArgs e)
+        private void shutMenu_Btn_MouseUp(object sender, MouseEventArgs e)
         {
-            if (shutMenu_Btn.BackColor.A == 0)
+            isPushed = false;
+        }
+
+        int x = 0;
+        private void shutMenu_Btn_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(isPushed)
             {
-                shutMenu_Btn_img.Visible = false;
+                shutMenu_Btn.Left -= x - e.X;
+                shutMenu_Btn.Width += x - e.X;
             }
-            else
-            {
-                shutMenu_Btn_img.Visible = true;
-                shutMenu_Btn_img.BackColor = Color.FromArgb(shutMenu_Btn.BackColor.A + 50, shutMenu_Btn.BackColor);
-
-            }
+            x = e.X;
         }
+
         #endregion
 
         #endregion

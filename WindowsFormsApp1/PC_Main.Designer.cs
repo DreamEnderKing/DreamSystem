@@ -1,4 +1,6 @@
-﻿namespace WindowsFormsApp1
+﻿using System.Drawing;
+
+namespace WindowsFormsApp1
 {
     partial class PC_Main
     {
@@ -47,7 +49,6 @@
             this.timeShow2 = new MyControls.TimeShow();
             this.Desktop_Main = new System.Windows.Forms.Panel();
             this.shutMenu_Btn = new System.Windows.Forms.Panel();
-            this.shutMenu_Btn_img = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.task)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.menuBtn)).BeginInit();
             this.menuMain.SuspendLayout();
@@ -55,8 +56,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.UserIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.shutBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings)).BeginInit();
-            this.shutMenu_Btn.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.shutMenu_Btn_img)).BeginInit();
             this.SuspendLayout();
             // 
             // task
@@ -266,31 +265,18 @@
             // 
             this.shutMenu_Btn.AllowDrop = true;
             this.shutMenu_Btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
-            this.shutMenu_Btn.Controls.Add(this.shutMenu_Btn_img);
+            this.shutMenu_Btn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("shutMenu_Btn.BackgroundImage")));
+            this.shutMenu_Btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.shutMenu_Btn.Location = new System.Drawing.Point(1150, 0);
             this.shutMenu_Btn.Name = "shutMenu_Btn";
             this.shutMenu_Btn.Size = new System.Drawing.Size(50, 600);
             this.shutMenu_Btn.TabIndex = 0;
+            this.shutMenu_Btn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.shutMenu_Btn_MouseDown);
             this.shutMenu_Btn.MouseEnter += new System.EventHandler(this.shutMenu_Btn_MouseEnter);
             this.shutMenu_Btn.MouseLeave += new System.EventHandler(this.shutMenu_Btn_MouseLeave);
             this.shutMenu_Btn.MouseHover += new System.EventHandler(this.shutMenu_Btn_MouseHover);
-            // 
-            // shutMenu_Btn_img
-            // 
-            this.shutMenu_Btn_img.BackColor = System.Drawing.Color.White;
-            this.shutMenu_Btn_img.Image = ((System.Drawing.Image)(resources.GetObject("shutMenu_Btn_img.Image")));
-            this.shutMenu_Btn_img.Location = new System.Drawing.Point(0, 275);
-            this.shutMenu_Btn_img.Name = "shutMenu_Btn_img";
-            this.shutMenu_Btn_img.Size = new System.Drawing.Size(50, 50);
-            this.shutMenu_Btn_img.TabIndex = 0;
-            this.shutMenu_Btn_img.TabStop = false;
-            this.shutMenu_Btn_img.Paint += new System.Windows.Forms.PaintEventHandler(this.shutMenu_Btn_img_Paint);
-            this.shutMenu_Btn_img.MouseDown += new System.Windows.Forms.MouseEventHandler(this.shutMenu_Btn_img_MouseDown);
-            this.shutMenu_Btn_img.MouseEnter += new System.EventHandler(this.shutMenu_Btn_MouseEnter);
-            this.shutMenu_Btn_img.MouseLeave += new System.EventHandler(this.shutMenu_Btn_MouseLeave);
-            this.shutMenu_Btn_img.MouseHover += new System.EventHandler(this.shutMenu_Btn_MouseHover);
-            this.shutMenu_Btn_img.MouseMove += new System.Windows.Forms.MouseEventHandler(this.shutMenu_Btn_img_MouseMove);
-            this.shutMenu_Btn_img.MouseUp += new System.Windows.Forms.MouseEventHandler(this.shutMenu_Btn_img_MouseUp);
+            this.shutMenu_Btn.MouseMove += new System.Windows.Forms.MouseEventHandler(this.shutMenu_Btn_MouseMove);
+            this.shutMenu_Btn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.shutMenu_Btn_MouseUp);
             // 
             // PC_Main
             // 
@@ -322,8 +308,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.UserIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.shutBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settings)).EndInit();
-            this.shutMenu_Btn.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.shutMenu_Btn_img)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -348,6 +332,5 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel Desktop_Main;
         private System.Windows.Forms.Panel shutMenu_Btn;
-        private System.Windows.Forms.PictureBox shutMenu_Btn_img;
     }
 }
